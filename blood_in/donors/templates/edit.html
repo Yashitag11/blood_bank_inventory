@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #ede9fe);
+    }
+    .container {
+        width: 40%;
+        margin: 60px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    h2 {
+        text-align: center;
+        color: #6b21a8;
+        margin-bottom: 20px;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+    input:focus {
+        border-color: #7c3aed;
+        box-shadow: 0 0 5px rgba(124, 58, 237, 0.4);
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #7c3aed, #14b8a6);
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    button:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #6d28d9, #0f766e);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Donor</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input name="first_name" value="{{ donor.first_name }}" placeholder="First Name">
+        <input name="last_name" value="{{ donor.last_name }}" placeholder="Last Name">
+        <input name="email" value="{{ donor.email }}" placeholder="Email">
+        <input name="phone" value="{{ donor.phone }}" placeholder="Phone">
+        <input name="age" value="{{ donor.age }}" placeholder="Age">
+        <input name="blood_group" value="{{ medical.blood_group }}" placeholder="Blood Group">
+        <input name="father_blood_group" value="{{ family.father_blood_group }}" placeholder="Father Blood Group">
+        <input name="mother_blood_group" value="{{ family.mother_blood_group }}" placeholder="Mother Blood Group">
+        <input type="date" name="last_donation_date" value="{{ family.last_donation_date }}">
+        <button type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

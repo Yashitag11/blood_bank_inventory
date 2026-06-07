@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ef8da7;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: #1f1f19;
+        font-style: italic;
+    }
+
+    table {
+        width: 95%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    th {
+        background: linear-gradient(135deg, #2563eb, #16a34a);
+        color: white;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+        background: #f9fbff;
+    }
+
+    tr:hover {
+        background: #e6f0ff;
+        transition: 0.3s;
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Button Styling */
+    .btn {
+        padding: 6px 14px;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s ease;
+        margin: 2px;
+    }
+
+    .edit-btn {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        box-shadow: 0 4px 10px rgba(0,128,0,0.3);
+    }
+
+    .edit-btn:hover {
+        background: linear-gradient(135deg, #16a34a, #15803d);
+        transform: translateY(-1px);
+    }
+
+    .delete-btn {
+        background: linear-gradient(135deg, #3b82f6, #1e40af);
+        box-shadow: 0 4px 10px rgba(0,0,255,0.3);
+    }
+
+    .delete-btn:hover {
+        background: linear-gradient(135deg, #1e40af, #1e3a8a);
+        transform: translateY(-1px);
+    }
+
+</style>
+</head>
+
+<body>
+
+<h2>Donor Records</h2>
+
+<table>
+<tr>
+<th>Reg</th><th>Name</th><th>Email</th><th>Phone</th>
+<th>Blood</th><th>Father</th><th>Mother</th><th>Last Donate</th><th>Action</th>
+</tr>
+
+{% for d in donors %}
+<tr>
+<td>{{ d.registration_no }}</td>
+<td>{{ d.first_name }} {{ d.last_name }}</td>
+<td>{{ d.email }}</td>
+<td>{{ d.phone }}</td>
+<td>{{ d.medicalinfo.blood_group }}</td>
+<td>{{ d.familydonationinfo.father_blood_group }}</td>
+<td>{{ d.familydonationinfo.mother_blood_group }}</td>
+<td>{{ d.familydonationinfo.last_donation_date }}</td>
+
+<td>
+<a href="{% url 'edit' d.registration_no %}">
+<button class="btn edit-btn">Edit</button>
+</a>
+
+<a href="{% url 'delete' d.registration_no %}">
+<button class="btn delete-btn">Delete</button>
+</a>
+</td>
+
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
